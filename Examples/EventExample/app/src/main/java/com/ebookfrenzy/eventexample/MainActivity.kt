@@ -19,11 +19,11 @@ class MainActivity : AppCompatActivity() {
 
 //when the button is pressed the text above is changed
         binding.myButton.setOnClickListener{
-            binding.statusText.text = "Button Clicked"
+            binding.statusText.text = getString(R.string.clicked)
         }
         //adding a long click method
         binding.myButton.setOnLongClickListener {
-            binding.statusText.text = "Long Button Click"
+            "Long Button Click".also { binding.statusText.text = it }
             true
         }
 
