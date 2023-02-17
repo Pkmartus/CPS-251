@@ -52,7 +52,7 @@ class MainFragment : Fragment() {
                 viewModel.addName(binding.nameBoxText.text.toString())
                 binding.namesListText.text = viewModel.getNamesList()
             } else {
-                binding.namesListText.text = " no Names"
+                binding.namesListText.text = "no Names"
             }
         }
 
