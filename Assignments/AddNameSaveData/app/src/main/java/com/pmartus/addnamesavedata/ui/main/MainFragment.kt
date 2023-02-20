@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.get
-import com.pmartus.addnamesavedata.R
 import com.pmartus.addnamesavedata.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -23,8 +21,7 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -42,17 +39,14 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //todo check if this actually works or go back to get
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        binding.namesListText.text = viewModel.getNamesList()
+        //binding.namesListText.text = viewModel.getNamesList()
 
         binding.addNameButton.setOnClickListener{
             if (binding.nameBoxText.text.isNotEmpty()) {
                 viewModel.addName(binding.nameBoxText.text.toString())
                 binding.namesListText.text = viewModel.getNamesList()
-            } else {
-                binding.namesListText.text = "no Names"
             }
         }
 
