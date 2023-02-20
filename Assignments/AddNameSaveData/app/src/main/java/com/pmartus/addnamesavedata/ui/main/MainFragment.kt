@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        //binding.namesListText.text = viewModel.getNamesList()
+        binding.namesListText.text = viewModel.getNamesList()
 
         binding.addNameButton.setOnClickListener{
             if (binding.nameBoxText.text.isNotEmpty()) {
