@@ -8,55 +8,32 @@ import android.view.View
 import android.view.ViewGroup
 import com.pmartus.viewmodeldemo.databinding.FragmentMainBinding
 import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
+import com.pmartus.viewmodeldemo.R
+import com.pmartus.viewmodeldemo.BR.myViewModel
 
 class MainFragment : Fragment() {
-
-    private var _binding: FragmentMainBinding? = null
-    private  val binding get() = _binding!!
-
     companion object {
         fun newInstance() = MainFragment()
     }
 
     private lateinit var viewModel: MainViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        // TODO: Use the ViewModel
-    }
+    private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //return inflater.inflate(R.layout.fragment_main, container, false)
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main,container,false)
+        binding.setLifecycleOwner(this)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        binding.resultText.text = viewModel.getResult().toString()
-        //the next 2 lines add the observer to the method
-        val resultObserver = Observer<Float> { result -> binding.resultText.text = result.toString()  }
-        viewModel.getResult().observe(viewLifecycleOwner, resultObserver)
+        binding.setVariable(myViewModel, viewModel)
 
-        binding.convertButton.setOnClickListener{
-            if (binding.dolarText.text.isNotEmpty()){
-                viewModel.setAmount(binding.dolarText.text.toString())
-                //binding.resultText.text = viewModel.getResult().toString()
-            } else {
-                binding.resultText.text = "No Value"
-            }
-        }
     }
 
 }
