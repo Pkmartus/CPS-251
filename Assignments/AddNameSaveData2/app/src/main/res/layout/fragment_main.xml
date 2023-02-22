@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="myViewModel"
+            type="com.pmartus.addnamesavedata.ui.main.MainViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,6 +26,7 @@
         android:hint="@string/enter_name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:text="@={myViewModel.nameBox}"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
+        android:onClick="@{() -> myViewModel.addName()}"
         android:text="@string/add_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +48,7 @@
         android:id="@+id/namesListText"
         android:layout_width="351dp"
         android:layout_height="wrap_content"
+        android:text="@{myViewModel.namesList}"
         android:hint="@string/no_names_to_display"
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,4 +56,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addNameButton"
         app:layout_constraintVertical_bias="0.231" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout></layout>

@@ -7,51 +7,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pmartus.addnamesavedata.databinding.FragmentMainBinding
+import androidx.databinding.DataBindingUtil
+import com.pmartus.addnamesavedata.R
+import com.pmartus.addnamesavedata.BR.myViewModel
 
 class MainFragment : Fragment() {
-
-    private var _binding: FragmentMainBinding? = null
-    private val binding get() = _binding!!
-
     companion object {
         fun newInstance() = MainFragment()
     }
 
     private lateinit var viewModel: MainViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-    }
+    private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main,container,false)
+        binding.setLifecycleOwner(this)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
-        binding.namesListText.text = viewModel.getNamesList()
-
-        binding.addNameButton.setOnClickListener{
-            if (binding.nameBoxText.text.isNotEmpty()) {
-                viewModel.addName(binding.nameBoxText.text.toString())
-                binding.namesListText.text = viewModel.getNamesList()
-            }
+        binding.setVariable(myViewModel, viewModel)
         }
-
-
-    }
-
 
 }
