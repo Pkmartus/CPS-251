@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pmartus.viewmodeldemo.databinding.FragmentMainBinding
-import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import com.pmartus.viewmodeldemo.R
 import com.pmartus.viewmodeldemo.BR.myViewModel
