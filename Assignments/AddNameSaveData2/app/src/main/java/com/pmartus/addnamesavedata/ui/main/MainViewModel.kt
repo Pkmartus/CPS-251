@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
     var nameBox: MutableLiveData<String> = MutableLiveData()
-    var list: MutableList<String> = mutableListOf<String>()
+    private var list: MutableList<String> = mutableListOf()
     var namesList: MutableLiveData<String> = MutableLiveData("")
 
     fun addName() {
@@ -16,10 +16,6 @@ class MainViewModel : ViewModel() {
                     namesList.value += n + "\n"
                 }
             }
-
-
         }
-
-
     }
 }
