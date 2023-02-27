@@ -12,6 +12,7 @@ class MainViewModel : ViewModel() {
         nameBox.let {
             if (!it.value.equals("")) {
                 list.add(it.value.toString())
+                namesList.value = ""
                 for (n: String in list) {
                     namesList.value += n + "\n"
                 }
