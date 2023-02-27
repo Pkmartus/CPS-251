@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.pmartus.viewmodeldemo.databinding.FragmentMainBinding
 import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.lifecycle.get
 
 class MainFragment : Fragment() {
 
@@ -19,11 +21,6 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var viewModel: MainViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,20 +39,19 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        binding.resultText.text = viewModel.getResult().toString()
-        //the next 2 lines add the observer to the method
-        val resultObserver = Observer<Float> { result -> binding.resultText.text = result.toString()  }
-        viewModel.getResult().observe(viewLifecycleOwner, resultObserver)
+        activity?.application.let {
+            val factory = SavedStateViewModelFactory(it, this)
+            viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+            val resultObserver = Observer<Float> { result -> binding.resultText.text = result.toString()  }
+            viewModel.getResult().observe(viewLifecycleOwner, resultObserver)
 
-        binding.convertButton.setOnClickListener{
-            if (binding.dolarText.text.isNotEmpty()){
-                viewModel.setAmount(binding.dolarText.text.toString())
-                //binding.resultText.text = viewModel.getResult().toString()
-            } else {
-                binding.resultText.text = "No Value"
+            binding.convertButton.setOnClickListener{
+                if (binding.dolarText.text.isNotEmpty()){
+                    viewModel.setAmount(binding.dolarText.text.toString())
+                } else {
+                    binding.resultText.text = "No Value"
+                }
             }
         }
     }
-
 }

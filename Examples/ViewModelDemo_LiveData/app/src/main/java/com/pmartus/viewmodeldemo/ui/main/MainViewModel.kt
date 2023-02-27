@@ -2,22 +2,18 @@ package com.pmartus.viewmodeldemo.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 
-const val RESULT_KEY = "Euro Value"
-
-class MainViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val rate = 0.74f
     private var dollarText = ""
     //private var result: Float = 0f
-    private var result: MutableLiveData<Float> = savedStateHandle.getLiveData(RESULT_KEY)
+    private var result: MutableLiveData<Float> = MutableLiveData()
 
     fun setAmount(value: String) {
         this.dollarText = value
-        val convertedValue = value.toFloat()*rate
-        result.value = convertedValue
-        savedStateHandle[RESULT_KEY] = convertedValue
+        //result = value.toFloat()*rate
+        result.setValue(value.toFloat()*rate)
     }
 
     fun getResult(): MutableLiveData<Float> {
