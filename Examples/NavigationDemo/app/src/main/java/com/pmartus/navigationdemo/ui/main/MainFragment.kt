@@ -39,7 +39,9 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         binding.button.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.mainToSecond)
+            val action : MainFragmentDirections.MainToSecond = MainFragmentDirections.mainToSecond()
+            action.setMessage(binding.userText.text.toString())
+            Navigation.findNavController(it).navigate(action)
         }
     }
 

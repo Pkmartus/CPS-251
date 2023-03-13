@@ -44,6 +44,12 @@ class SecondFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        arguments?.let { val args = SecondFragmentArgs.fromBundle(it)
+        binding.argText.text = args.message}
+    }
+
     interface  OnFragmentInteractionListener {
         // TODO: update argument type and name
         fun onFragmentInteraction(uri: Uri)
