@@ -1,12 +1,12 @@
 package com.pmartus.navigationproject.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.net.Uri
-import com.pmartus.navigationproject.R
 import com.pmartus.navigationproject.databinding.FragmentSecondBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,11 +42,12 @@ class SecondFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("DiscouragedApi")
     override fun onStart() {
         super.onStart()
         arguments?.let { val args = SecondFragmentArgs.fromBundle(it)
             binding.textView2.text = args.title
-            var resID: Int = resources.getIdentifier(args.imageID, "drawable",
+            val resID: Int = resources.getIdentifier(args.imageID, "drawable",
                 context?.packageName)
             binding.secondImage.setImageResource(resID)}
     }
@@ -55,23 +56,4 @@ class SecondFragment : Fragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment SecondFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            SecondFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
 }

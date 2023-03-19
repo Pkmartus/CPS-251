@@ -2,7 +2,6 @@ package com.pmartus.navigationproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.pmartus.navigationproject.ui.main.MainFragment
 import android.net.Uri
 import com.pmartus.navigationproject.ui.main.SecondFragment
 

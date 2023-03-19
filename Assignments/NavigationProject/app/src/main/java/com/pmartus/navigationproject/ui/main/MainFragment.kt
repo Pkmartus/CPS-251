@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.pmartus.navigationproject.databinding.FragmentMainBinding
+
 class MainFragment : Fragment() {
 
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
     private var _binding: FragmentMainBinding? = null
@@ -43,7 +40,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    fun buttonPress(view: View, num: Int, imageID: String) {
+    private fun buttonPress(view: View, num: Int, imageID: String) {
         val action : MainFragmentDirections.MainToSecond = MainFragmentDirections.mainToSecond()
         action.imageID =  imageID
         action.title = "Image $num"
