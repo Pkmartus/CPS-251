@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.net.Uri
 import com.pmartus.navigationproject.ui.main.SecondFragment
 
-class MainActivity : AppCompatActivity(),SecondFragment.onFragmentInteractionListener {
+class MainActivity : AppCompatActivity(),SecondFragment.OnFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -52,7 +52,7 @@ class SecondFragment : Fragment() {
             binding.secondImage.setImageResource(resID)}
     }
 
-    interface onFragmentInteractionListener {
+    interface OnFragmentInteractionListener {
         fun onFragmentInteraction(uri: Uri)
     }
 
