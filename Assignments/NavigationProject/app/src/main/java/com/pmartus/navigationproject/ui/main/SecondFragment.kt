@@ -1,6 +1,5 @@
 package com.pmartus.navigationproject.ui.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -42,14 +41,11 @@ class SecondFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("DiscouragedApi")
     override fun onStart() {
         super.onStart()
         arguments?.let { val args = SecondFragmentArgs.fromBundle(it)
             binding.textView2.text = args.title
-            val resID: Int = resources.getIdentifier(args.imageID, "drawable",
-                context?.packageName)
-            binding.secondImage.setImageResource(resID)}
+            binding.secondImage.setImageResource(args.imageID)}
     }
 
     interface OnFragmentInteractionListener {

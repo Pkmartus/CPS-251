@@ -24,7 +24,7 @@
             android:defaultValue="No Message"/>
         <argument
             android:name="imageID"
-            app:argType="string"
-            android:defaultValue="No Message"/>
+            app:argType="integer"
+            android:defaultValue="0"/>
     </fragment>
 </navigation>

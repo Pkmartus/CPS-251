@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.pmartus.navigationproject.R
 import com.pmartus.navigationproject.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -29,20 +30,20 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        binding.button.setOnClickListener{ it ->
-            buttonPress(it,1, "android_image_1")
+        binding.button.setOnClickListener{
+            buttonPress(it,1, R.drawable.android_image_1)
         }
-        binding.button2.setOnClickListener{ it ->
-            buttonPress(it, 2, "android_image_2")
+        binding.button2.setOnClickListener{
+            buttonPress(it, 2, R.drawable.android_image_2)
         }
-        binding.button3.setOnClickListener{ it ->
-            buttonPress(it, 3, "android_image_3")
+        binding.button3.setOnClickListener{
+            buttonPress(it, 3, R.drawable.android_image_3)
         }
     }
 
-    private fun buttonPress(view: View, num: Int, imageID: String) {
+    private fun buttonPress(view: View, num: Int, imageID: Int) {
         val action : MainFragmentDirections.MainToSecond = MainFragmentDirections.mainToSecond()
-        action.imageID =  imageID
+        action.imageID = imageID
         action.title = "Image $num"
         Navigation.findNavController(view).navigate(action)
     }
