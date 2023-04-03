@@ -1,4 +1,4 @@
-package com.pmartus.carddemo
+package com.pmartus.recyclerproject
 
 import org.junit.Test
 

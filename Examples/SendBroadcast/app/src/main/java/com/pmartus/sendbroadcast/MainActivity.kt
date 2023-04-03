@@ -24,8 +24,10 @@ class MainActivity : AppCompatActivity() {
         sendBroadcast(intent)
     }
 
+    //creating a method for configuring the receiver
     private fun configureReceiver() {
         val filter = IntentFilter()
+        //define actions the receiver filter will look for
         filter.addAction("com.pmartus.sendbroadcast")
         filter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED")
         this.receiver = MyReceiver()

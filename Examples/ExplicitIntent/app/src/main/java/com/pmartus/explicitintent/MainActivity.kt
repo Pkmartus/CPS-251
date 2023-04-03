@@ -5,12 +5,18 @@ import android.os.Bundle
 import com.pmartus.explicitintent.databinding.ActivityMainBinding
 import android.view.View
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContract
+import android.app.Activity
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     //create a request code for the intent
-    private val request_code = 5
+    //part of old depreciated method no longer necessary
+    //private val request_code = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,16 +29,19 @@ class MainActivity : AppCompatActivity() {
     //pull the value from the edit text box and create a key-value pair to pass through thin intent.
         val myString = binding.editText1.text.toString()
         i.putExtra("qString", myString)
-        //start the activity with a simple intent
+        //start the activity with a simple intent one way street
         //startActivity(i)
-        //start activity as a sub activity using the request code
-        startActivityForResult(i, request_code)
+        //start activity as a sub activity using the request code old version
+        //startActivityForResult(i, request_code)
+    //new method
+        startForResult.launch(i)
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        //check if request code matches the one given by the intent and ensure activity is sucessful
-        if((requestCode == request_code)&&(resultCode == RESULT_OK)){
+    //new way to send intent with a result
+    val startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+        result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
             data?.let {
                 if (it.hasExtra("returnData")) {
                     val returnString = it.extras?.getString("returnData")
@@ -41,4 +50,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        //check if request code matches the one given by the intent and ensure activity is sucessful
+//        if((requestCode == request_code)&&(resultCode == RESULT_OK)){
+//            data?.let {
+//                if (it.hasExtra("returnData")) {
+//                    val returnString = it.extras?.getString("returnData")
+//                    binding.textView1.text = returnString
+//                }
+//            }
+//        }
+//    }
 }

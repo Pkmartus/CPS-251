@@ -1,8 +1,8 @@
-package com.pmartus.carddemo
+package com.pmartus.recyclerproject
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.pmartus.carddemo.databinding.ActivityMainBinding
+import com.pmartus.recyclerproject.databinding.ActivityMainBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 

@@ -1,4 +1,4 @@
-package com.pmartus.carddemo
+package com.pmartus.recyclerproject
 
 import android.view.LayoutInflater
 import android.widget.ImageView

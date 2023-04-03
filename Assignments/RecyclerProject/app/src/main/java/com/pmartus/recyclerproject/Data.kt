@@ -1,7 +1,6 @@
-package com.pmartus.carddemo
+package com.pmartus.recyclerproject
 
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 object Data{
 
