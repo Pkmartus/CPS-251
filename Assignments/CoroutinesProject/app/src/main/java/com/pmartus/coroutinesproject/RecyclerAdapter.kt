@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(viewModel: MainViewModel) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter(var viewModel: MainViewModel) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    var viewModel= viewModel
-
-        override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
             val v = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_layout, viewGroup, false)
             return ViewHolder(v)
         }

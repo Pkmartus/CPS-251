@@ -1,5 +1,6 @@
 package com.pmartus.coroutinesproject
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -29,13 +30,15 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = layoutManager
         adapter = RecyclerAdapter(viewModel)
         binding.recyclerView.adapter = adapter
+        binding.button.setOnClickListener { generateOutput() }
     }
 
-    fun generateOutput(view: View) {
+    fun generateOutput() {
         myCoroutineScope.launch(Dispatchers.Main) { randomWait() }
         Log.i("ZZZ", "generateOutput: ")
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private suspend fun randomWait() {
         val wait = Random.nextInt(1, 10)*1000
         val name = binding.enterName.text.toString()
