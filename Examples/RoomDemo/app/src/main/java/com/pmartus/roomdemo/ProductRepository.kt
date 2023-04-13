@@ -26,7 +26,7 @@ class ProductRepository(application: Application) {
         coroutineScope.launch(Dispatchers.IO) { asyncInsert(newProduct)  }
     }
 
-    private suspend fun asyncInsert(product: Product) {
+    private fun asyncInsert(product: Product) {
         productDao?.insertProduct(product)
     }
 
@@ -34,15 +34,16 @@ class ProductRepository(application: Application) {
         coroutineScope.launch(Dispatchers.IO) { asyncDelete(name) }
     }
 
-    private suspend fun asyncDelete(name: String) {
+    private fun asyncDelete(name: String) {
         productDao?.deleteProduct(name)
     }
 
     //because the find product method needs access to the searchResults variable
     // the call to asyncFind is dispatched on the main thread and then uses the IO dispatcher to perform the database operation
     fun findProduct(name: String) {
-        coroutineScope.launch(Dispatchers.Main) { searchResults.value = asyncFind(name).await() }
+        coroutineScope.launch(Dispatchers.Main) { searchResults.value = asyncFind(name) }
     }
 
-    private suspend fun asyncFind(name: String): Deferred<List<Product>?> = coroutineScope.async(Dispatchers.IO) { return@async productDao?.findProduct(name) }
+    private suspend fun asyncFind(name: String): List<Product>? =
+        coroutineScope.async(Dispatchers.IO) { return@async productDao?.findProduct(name) }.await()
 }

@@ -7,4 +7,6 @@
     <string name="add">Add</string>
     <string name="find">Find</string>
     <string name="delete">Delete</string>
+    <string name="incomplete_information">Incomplete Information</string>
+    <string name="no_match">No Match</string>
 </resources>

@@ -1,13 +1,11 @@
 package com.pmartus.roomdemo.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pmartus.roomdemo.R
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pmartus.roomdemo.Product
 import androidx.fragment.app.viewModels
@@ -51,7 +49,7 @@ class MainFragment : Fragment() {
                 viewModel.insertProduct(product)
                 clearFields()
             } else {
-                binding.productID.text = "Incomplete Information"
+                binding.productID.text = R.string.incomplete_information.toString()
             }
         }
         binding.findButton.setOnClickListener{
@@ -63,20 +61,24 @@ class MainFragment : Fragment() {
     }
 
     private fun observerSetup() {
-        viewModel.getAllProducts()?.observe(viewLifecycleOwner,
-            Observer { products -> products?.let {
+        viewModel.getAllProducts()?.observe(viewLifecycleOwner
+        ) { products ->
+            products?.let {
                 adapter?.setProductList(it)
-            } })
-        viewModel.getSearchResults().observe(viewLifecycleOwner,
-            Observer { products ->  products?.let {
+            }
+        }
+        viewModel.getSearchResults().observe(viewLifecycleOwner
+        ) { products ->
+            products?.let {
                 if (it.isNotEmpty()) {
-                    binding.productID.text = String.format(Locale.US, "%d" , it[0].id)
+                    binding.productID.text = String.format(Locale.US, "%d", it[0].id)
                     binding.productName.setText(it[0].productName)
                     binding.productQuantity.setText(String.format(Locale.US, "%d", it[0].quantity))
                 } else {
-                    binding.productID.text = "No Match"
+                    binding.productID.text = R.string.no_match.toString()
                 }
-            }})
+            }
+        }
     }
 
     private fun recyclerSetup() {

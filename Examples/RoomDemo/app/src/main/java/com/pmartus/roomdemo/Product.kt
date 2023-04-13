@@ -1,6 +1,5 @@
 package com.pmartus.roomdemo
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,7 +9,6 @@ import androidx.room.PrimaryKey
 class Product {
     //adding annotations for the entity
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name = "productId")
     var id:Int = 0
 

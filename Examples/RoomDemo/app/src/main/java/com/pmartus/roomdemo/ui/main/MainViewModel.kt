@@ -1,6 +1,5 @@
 package com.pmartus.roomdemo.ui.main
 
-import androidx.lifecycle.ViewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -11,13 +10,8 @@ import com.pmartus.roomdemo.ProductRepository
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: ProductRepository = ProductRepository(application)
-    private val allProducts: LiveData<List<Product>>?
-    private val searchResults: MutableLiveData<List<Product>>
-
-    init {
-        allProducts= repository.allProducts
-        searchResults = repository.searchResults
-    }
+    private val allProducts: LiveData<List<Product>>? = repository.allProducts
+    private val searchResults: MutableLiveData<List<Product>> = repository.searchResults
 
     fun insertProduct(product: Product) {
         repository.insertProduct(product)

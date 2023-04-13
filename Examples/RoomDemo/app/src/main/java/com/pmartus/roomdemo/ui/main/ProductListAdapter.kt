@@ -1,11 +1,11 @@
 package com.pmartus.roomdemo.ui.main
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pmartus.roomdemo.Product
 import com.pmartus.roomdemo.R
 
@@ -26,6 +26,7 @@ class ProductListAdapter(private val productItemLayout: Int):
         return ViewHolder(view)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setProductList(products: List<Product>) {
         productList = products
         notifyDataSetChanged()

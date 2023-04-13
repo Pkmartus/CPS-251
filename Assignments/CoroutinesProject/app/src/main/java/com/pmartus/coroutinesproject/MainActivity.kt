@@ -3,7 +3,6 @@ package com.pmartus.coroutinesproject
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.pmartus.coroutinesproject.databinding.ActivityMainBinding
