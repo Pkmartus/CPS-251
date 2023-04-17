@@ -10,9 +10,10 @@ class ContactRepository(application: Application) {
 
     //the results of a search will be stored here
     val searchResults = MutableLiveData<List<Contact>>()
+    val sortedList = MutableLiveData<List<Contact>>()
     private var contactDao: ContactDao?
     //return the entire database stored in liveData so that the recyclerView can display it
-    val allContacts: LiveData<List<Contact>>?
+    var allContacts: LiveData<List<Contact>>?
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     init {
@@ -46,4 +47,11 @@ class ContactRepository(application: Application) {
 
     private suspend fun asyncFind(name: String): List<Contact>? =
         coroutineScope.async(Dispatchers.IO) { return@async contactDao?.findContact(name) }.await()
+
+    fun sortContactAsc() {
+        coroutineScope.launch(Dispatchers.Main) { sortedList.value = asyncSortAsc() }
+    }
+
+    private suspend fun asyncSortAsc(): List<Contact>? =
+        coroutineScope.async(Dispatchers.IO) { return@async contactDao?.sortContactAsc() }.await()
 }

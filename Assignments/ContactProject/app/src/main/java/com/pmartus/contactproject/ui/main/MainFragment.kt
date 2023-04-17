@@ -49,28 +49,32 @@ class MainFragment : Fragment() {
         }
         binding.findButton.setOnClickListener{
             viewModel.findContact(binding.contactName.text.toString()) }
+        binding.ascButton.setOnClickListener{
+            viewModel.sortContactAsc()
+        }
         //todo delete button on trash can
-        //todo listener for sort buttons
+
     }
 
     private fun observerSetup() {
-        viewModel.getAllContacts()?.observe(viewLifecycleOwner
+        /*viewModel.getAllContacts()?.observe(viewLifecycleOwner
         ) { contacts ->
             contacts?.let {
                 adapter?.setContactList(it)
             }
         }
-       /* viewModel.getSearchResults().observe(viewLifecycleOwner
+        viewModel.getSearchResults().observe(viewLifecycleOwner
         ) { contacts ->
             contacts?.let {
                 if (it.isNotEmpty()) {
-                    binding.contactName.setText(it[0].contactName)
-                    binding.contactNumber.setText(String.format(Locale.US, "%d", it[0].contactNumber))
+                    adapter?.setContactList(it)
                 } else {
-                    //todo add toast
+                    Toast.makeText(activity, "You must enter a search criteria in the name field", Toast.LENGTH_SHORT).show()
                 }
             }
-        }*/
+        }
+        viewModel.getSortedList()?.observe(viewLifecycleOwner)*/
+
     }
 
     private fun recyclerSetup() {

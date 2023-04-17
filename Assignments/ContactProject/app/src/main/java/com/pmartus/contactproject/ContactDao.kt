@@ -23,7 +23,7 @@ interface ContactDao {
 
 //THIS DOES THE ASC SORT FROM THE DATABASE
     @Query("SELECT * FROM contacts ORDER BY contactName ASC")
-    fun sortContactAsc(): LiveData<List<Contact>>
+    fun sortContactAsc(): List<Contact>
 
 //THIS DOES THE DESC SORT FROM THE DATABASE
     @Query("SELECT * FROM contacts ORDER BY contactName DESC")

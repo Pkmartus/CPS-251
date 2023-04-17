@@ -12,6 +12,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: ContactRepository = ContactRepository(application)
     private val allContacts: LiveData<List<Contact>>? = repository.allContacts
     private val searchResults: MutableLiveData<List<Contact>> = repository.searchResults
+    private val sortedList: MutableLiveData<List<Contact>> = repository.sortedList
 
     fun insertContact(contact: Contact) {
         repository.insertContact(contact)
@@ -31,5 +32,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAllContacts(): LiveData<List<Contact>>? {
         return allContacts
+    }
+
+    fun sortContactAsc() {
+        repository.sortContactAsc()
+    }
+
+    fun getSortedList(): MutableLiveData<List<Contact>> {
+        return sortedList
     }
 }
