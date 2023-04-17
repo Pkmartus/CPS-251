@@ -1,18 +1,18 @@
 package com.pmartus.contactproject.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.pmartus.contactproject.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pmartus.contactproject.Contact
 import androidx.fragment.app.viewModels
 import com.pmartus.contactproject.databinding.FragmentMainBinding
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), OnTrashClickListener {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
     }
 
     private fun listenerSetup() {
-        binding.addButton.setOnClickListener() {
+        binding.addButton.setOnClickListener {
             val name = binding.contactName.text.toString()
             val number = binding.contactNumber.text.toString()
             if (name != "" && number.length == 10) {
@@ -50,14 +50,13 @@ class MainFragment : Fragment() {
         binding.findButton.setOnClickListener{
             viewModel.findContact(binding.contactName.text.toString()) }
         binding.ascButton.setOnClickListener{
-            viewModel.sortContactAsc()
-        }
-        //todo delete button on trash can
-
+            viewModel.sortContactAsc() }
+        binding.descButton.setOnClickListener{
+            viewModel.sortContactDesc() }
     }
 
     private fun observerSetup() {
-        /*viewModel.getAllContacts()?.observe(viewLifecycleOwner
+        viewModel.getAllContacts()?.observe(viewLifecycleOwner
         ) { contacts ->
             contacts?.let {
                 adapter?.setContactList(it)
@@ -73,12 +72,18 @@ class MainFragment : Fragment() {
                 }
             }
         }
-        viewModel.getSortedList()?.observe(viewLifecycleOwner)*/
-
+        viewModel.getSortedList().observe(viewLifecycleOwner)
+        { contacts ->
+            contacts?.let {
+                if (it.isNotEmpty()) {
+                    adapter?.setContactList(it)
+                }
+            }
+        }
     }
 
     private fun recyclerSetup() {
-        adapter = ContactListAdapter()
+        adapter = ContactListAdapter(this)
         binding.contactRecycler.layoutManager = LinearLayoutManager(context)
         binding.contactRecycler.adapter = adapter
     }
@@ -88,7 +93,10 @@ class MainFragment : Fragment() {
         binding.contactNumber.setText("")
     }
 
-
+    override fun onTrashClick(int: Int) {
+        viewModel.deleteContact(int)
+        Log.i("ZZZ",    "$int made it to the fragment")
+    }
 
 
 }

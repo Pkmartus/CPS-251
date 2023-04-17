@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 
-//the contact repository that interacts with the room database on behalf of the viewmodel
+//the contact repository that interacts with the room database on behalf of the view model
 class ContactRepository(application: Application) {
 
     //the results of a search will be stored here
@@ -54,4 +54,11 @@ class ContactRepository(application: Application) {
 
     private suspend fun asyncSortAsc(): List<Contact>? =
         coroutineScope.async(Dispatchers.IO) { return@async contactDao?.sortContactAsc() }.await()
+
+    fun sortContactDesc() {
+        coroutineScope.launch(Dispatchers.Main) { sortedList.value = asyncSortDesc() }
+    }
+
+    private suspend fun asyncSortDesc(): List<Contact>? =
+        coroutineScope.async(Dispatchers.IO) { return@async contactDao?.sortContactDesc() }.await()
 }

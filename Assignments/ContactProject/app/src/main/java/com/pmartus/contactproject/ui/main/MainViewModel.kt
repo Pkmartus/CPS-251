@@ -38,6 +38,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.sortContactAsc()
     }
 
+    fun sortContactDesc() {
+        repository.sortContactDesc()
+    }
+
     fun getSortedList(): MutableLiveData<List<Contact>> {
         return sortedList
     }

@@ -27,5 +27,5 @@ interface ContactDao {
 
 //THIS DOES THE DESC SORT FROM THE DATABASE
     @Query("SELECT * FROM contacts ORDER BY contactName DESC")
-    fun sortContactDesc(): LiveData<List<Contact>>
+    fun sortContactDesc(): List<Contact>
 }

@@ -40,7 +40,7 @@
             app:layout_constraintTop_toBottomOf="@+id/displayName" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/trash_can"
             android:layout_width="71dp"
             android:layout_height="71dp"
             android:clickable="true"
