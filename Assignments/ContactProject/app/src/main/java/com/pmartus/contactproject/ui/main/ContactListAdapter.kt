@@ -17,8 +17,6 @@ interface OnTrashClickListener {
 class ContactListAdapter(private val onTrashClickListener: OnTrashClickListener) : RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
 
     private var contactList: List<Contact>? = null
-    //var listener: OnTrashClickListener? = null
-    //var onItemClick: ((Contact) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ViewHolder, listPosition: Int){
         contactList.let {

@@ -1,7 +1,6 @@
 package com.pmartus.contactproject.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -95,7 +94,6 @@ class MainFragment : Fragment(), OnTrashClickListener {
 
     override fun onTrashClick(int: Int) {
         viewModel.deleteContact(int)
-        Log.i("ZZZ",    "$int made it to the fragment")
     }
 
 
